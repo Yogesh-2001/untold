@@ -88,18 +88,9 @@ const AllDrivesTable = () => {
     {
       field: "companyName",
       headerName: "Company Name",
-      width: 400,
+      width: 300,
     },
-    {
-      field: "Date",
-      headerName: "Drive Date",
-      width: 200,
-      renderCell: (params) => (
-        <p className="my-auto">
-          {new Date(params.row?.driveDate).toDateString()}
-        </p>
-      ),
-    },
+
     {
       field: "engAggrrpercentCriteria",
       headerName: "Engineering Aggregate",
@@ -129,6 +120,26 @@ const AllDrivesTable = () => {
           ) : (
             "-"
           )}
+        </p>
+      ),
+    },
+    {
+      field: "Date",
+      headerName: "Drive Date",
+      width: 200,
+      renderCell: (params) => (
+        <p className="my-auto">
+          {new Date(params.row?.driveDate).toDateString()}
+        </p>
+      ),
+    },
+    {
+      field: "lastApplyDate",
+      headerName: "Registration End Date",
+      width: 200,
+      renderCell: (params) => (
+        <p className="my-auto">
+          {new Date(params.row?.lastApplyDate).toDateString()}
         </p>
       ),
     },

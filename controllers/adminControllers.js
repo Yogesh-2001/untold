@@ -5,30 +5,8 @@ import placementModel from "../models/placementModel.js";
 // const placed = require("../models/placementModel.js").default
 import profileModel from "../models/profileModel.js";
 import allPlacementModel from "../models/allPlacementModel.js";
-import { transporter } from "../server.js";
+import materialModel from "../models/placementMaterialModel.js";
 import testModel from "../models/testModel.js";
-export const sendMailNotification = async (req, res) => {
-  var mailOptions = {
-    from: process.env.MAIL_USERNAME,
-    to: req.body.emailarray,
-    subject: "TPO cell vidyalankar",
-    template: "email",
-    context: {
-      company: req.body.formData.companyName,
-      package: req.body.formData.package,
-    },
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error);
-      res.status(500).send(error);
-    } else {
-      // console.log(info.response);
-      res.status(200).json({ message: "emails send success" });
-    }
-  });
-};
 
 export const addStudents = async (req, res) => {
   try {
@@ -191,4 +169,17 @@ export const getAllPlacedStudents = async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
+};
+
+export const AddPlacementMaterial = (req, res) => {
+  materialModel
+    .create(req.body)
+    .then((material) => {
+      console.log(`Added new material`);
+      res.status(200).send("Added new material");
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(501).send("Failed to add material");
+    });
 };

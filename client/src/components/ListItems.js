@@ -73,7 +73,7 @@ const ListItems = () => {
         <Link to={"student/dashboard/all-drives"}>
           <ListItem button>
             <img
-              src="https://cdn-icons-png.flaticon.com/512/993/993854.png"
+              src="/images/grid.png"
               width={25}
               style={{ marginRight: "30px" }}
             />
@@ -84,12 +84,20 @@ const ListItems = () => {
         <Link to={"/student/dashboard/view-test"}>
           <ListItem button>
             <img
-              src={"https://cdn-icons-png.flaticon.com/512/5968/5968528.png"}
-              width={25}
-              style={{ marginRight: "30px" }}
+              src={"/images/classtest.png"}
+              style={{ width: "25px", marginRight: "30px" }}
             />
 
             <ListItemText primary="View Tests" />
+          </ListItem>
+        </Link>
+        <Link to={"/student/dashboard/view-material"}>
+          <ListItem button>
+            <ListItemIcon>
+              <img src="/images/view-material.png" style={{ width: "25px" }} />
+            </ListItemIcon>
+
+            <ListItemText primary="View Material" />
           </ListItem>
         </Link>
         <Signout />

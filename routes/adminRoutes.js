@@ -6,9 +6,9 @@ import {
   allstudents,
   addPlacedStudent,
   getAllPlaced,
-  sendMailNotification,
   createTest,
   getAllPlacedStudents,
+  AddPlacementMaterial,
 } from "../controllers/adminControllers.js";
 
 //router object
@@ -20,7 +20,7 @@ router.post("/add-notice", addNotice);
 router.get("/get-allstudents", allstudents);
 router.post("/add-placed-students", addPlacedStudent);
 router.get("/get-all-placed", getAllPlaced);
-router.post("/send-email-notification", sendMailNotification);
+router.post("/add-placement-material", AddPlacementMaterial);
 router.post("/create-test", createTest);
 router.get("/all-placed-student", getAllPlacedStudents);
 export default router;

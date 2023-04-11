@@ -1,6 +1,7 @@
 import allPlacementModel from "../models/allPlacementModel.js";
 import placementModel from "../models/placementModel.js";
 import profileModel from "../models/profileModel.js";
+import { transporter } from "../server.js";
 
 export const getAllDrives = async (req, res) => {
   try {
@@ -51,6 +52,14 @@ export const placeStudents = async (req, res) => {
     placedOn: Date.now(),
   });
 
+  const Emails = await profileModel
+    .find({ _id: { $in: studentIds } }, "user")
+    .populate("user", "email");
+
+  const companyName = await placementModel
+    .findById(driveId)
+    .select("-_id companyName");
+
   try {
     // save the document to the database
     await studentPlacement.save();
@@ -64,6 +73,9 @@ export const placeStudents = async (req, res) => {
       });
       await student.save();
     }
+
+    sendMail(Emails, companyName, Package);
+
     res
       .status(200)
       .json({ success: true, message: "students placed successfully" });
@@ -71,4 +83,26 @@ export const placeStudents = async (req, res) => {
     console.error(error);
     res.status(500).json({ success: false });
   }
+};
+
+const sendMail = (Emails, companyName, Package) => {
+  var mailOptions = {
+    from: process.env.MAIL_USERNAME,
+    to: Emails,
+    subject: "TPO cell vidyalankar",
+    template: "email",
+    context: {
+      company: companyName,
+      package: Package,
+    },
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      return false;
+    } else {
+      return true;
+    }
+  });
 };

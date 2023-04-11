@@ -29,6 +29,7 @@ import HrDashboard from "./pages/hr/HrDashboard";
 import JobsPosted from "./pages/hr/JobsPosted";
 import ParticularDriveTable from "./pages/hr/ParticularDriveTable";
 import ViewTest from "./pages/student/ViewTest";
+import ViewMaterials from "./pages/student/ViewMaterials";
 const App = () => {
   return (
     <>
@@ -99,6 +100,14 @@ const App = () => {
             element={
               <PrivateRoute>
                 <ViewTest />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/student/dashboard/view-material"
+            element={
+              <PrivateRoute>
+                <ViewMaterials />
               </PrivateRoute>
             }
           />

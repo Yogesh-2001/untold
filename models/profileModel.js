@@ -23,24 +23,6 @@ const profileSchema = new mongoose.Schema(
       type: String,
     },
 
-    dob: {
-      type: Date,
-      default: Date.now,
-      required: true,
-    },
-    phone: {
-      type: Number,
-      required: true,
-      match: /^(\+?\d{1,3}[- ]?)?\d{10}$/,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
-    gender: {
-      type: String,
-      required: true,
-    },
     placed: {
       type: Boolean,
       default: false,
@@ -62,11 +44,7 @@ const profileSchema = new mongoose.Schema(
         },
       },
     ],
-    sscschoolname: { type: String, required: true },
-    class10th: { type: Number, required: true },
-    hsccollege: { type: String, required: true },
-    class12th: { type: Number, required: true },
-    engcollege: { type: String, required: true },
+
     branch: { type: String, required: true },
     engineering_division: { type: String, required: true },
     engineeringpercent: { type: Number, required: true },

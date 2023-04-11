@@ -2,6 +2,7 @@ import profileModel from "../models/profileModel.js";
 import placementModel from "../models/placementModel.js";
 import { ObjectId } from "mongodb";
 import testModel from "../models/testModel.js";
+import placementMaterialModel from "../models/placementMaterialModel.js";
 export const createProfileCtrl = async (req, res) => {
   try {
     const profile = new profileModel(req.body);
@@ -50,9 +51,11 @@ export const getProfile = async (req, res) => {
 
 export const getProfileUrl = async (req, res) => {
   try {
-    const getprofile = await profileModel.find({ user: req.params.id });
+    const getprofile = await profileModel
+      .find({ user: req.params.id })
+      .populate("drivesApplied");
 
-    res.status(200).json(getprofile.photourl);
+    res.status(200).json(getprofile);
   } catch (error) {
     res.status(501).json({ message: "failed to fetch placed data" });
   }
@@ -131,5 +134,14 @@ export const getAllTests = async (req, res) => {
     res.status(200).json(tests);
   } catch (error) {
     res.status(500).json({ success: false, error });
+  }
+};
+
+export const getAllAddedMaterial = async (req, res) => {
+  try {
+    const materials = await placementMaterialModel.find();
+    res.status(200).json(materials);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
   }
 };

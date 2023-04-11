@@ -20,7 +20,7 @@ const JobsPosted = () => {
   return (
     <>
       <section className="col-12 d-flex flex-sm-row flex-column justify-content-between p-3 flex-wrap">
-        {alldrives &&
+        {
           alldrives?.map((drive, index) => {
             return (
               <>

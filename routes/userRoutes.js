@@ -10,6 +10,7 @@ import {
   getAllAppliedDrives,
   getProfileUrl,
   getAllTests,
+  getAllAddedMaterial,
 } from "../controllers/userController.js";
 
 //router object
@@ -25,5 +26,6 @@ router.put("/apply-drive/:id", applyDrive);
 router.get("/get-all-applied-drives/:id", getAllAppliedDrives);
 router.get("/get-profile-url/:id", getProfileUrl);
 router.get("/get-all-tests", getAllTests);
+router.get("/get-all-materials", getAllAddedMaterial);
 // router.get("/get-profile/:id",getProfile);
 export default router;

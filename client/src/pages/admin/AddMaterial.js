@@ -3,21 +3,22 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Card } from "@material-ui/core";
 import FileBase64 from "react-file-base64";
 import { useState } from "react";
-
+import axios from "axios";
+import { toast } from "react-toastify";
 const AddMaterial = () => {
-  const [files, setFiles] = useState([]);
-  const [details, setDetails] = useState({});
+  const [material, setMaterial] = useState("");
   const onFinish = (values) => {
-    setDetails({ ...values, ...files });
-    console.log(details);
-    console.log("Received values of form: ", values);
-    console.log("Uploaded files: ", files);
+    axios
+      .post("http://localhost:8080/api/v1/admin/add-placement-material", {
+        ...values,
+        material,
+      })
+      .then((res) => {
+        toast.success(res.data);
+      });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-  };
-  const handleFileUpload = (file) => {
-    setFiles((prevFiles) => [...prevFiles, file.base64]);
   };
 
   return (
@@ -70,15 +71,12 @@ const AddMaterial = () => {
 
           <Form.Item
             label="Upload Material"
-            valuePropName="fileList"
-            getValueFromEvent={(e) => {
-              if (Array.isArray(e)) {
-                return e;
-              }
-              return e && e.fileList;
-            }}
+            rules={[{ required: true, message: "Please input material!" }]}
           >
-            <FileBase64 multiple={true} onDone={handleFileUpload} />
+            <FileBase64
+              multiple={false}
+              onDone={({ base64 }) => setMaterial(base64)}
+            />
           </Form.Item>
 
           <Form.Item

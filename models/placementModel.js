@@ -30,6 +30,9 @@ const placementSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    lastApplyDate: {
+      type: Date,
+    },
     postedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",

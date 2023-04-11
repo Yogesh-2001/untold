@@ -28,6 +28,7 @@ const AddPlacement = () => {
     branchcriteria: [],
     jdfile: "",
     engAggrrpercentCriteria: "",
+    lastDate: "",
   });
 
   const handleBranchChange = (e) => {
@@ -96,6 +97,20 @@ const AddPlacement = () => {
               name="driveDate"
               value={con.driveDate}
               onChange={(e) => setCon({ ...con, driveDate: e.target.value })}
+              type="date"
+              defaultValue="2017-05-24"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+              className="col-md-5 col-12 my-2"
+            />
+            <TextField
+              id="date"
+              label="Registration Deadline"
+              name="lastDate"
+              value={con.lastDate}
+              onChange={(e) => setCon({ ...con, lastDate: e.target.value })}
               type="date"
               defaultValue="2017-05-24"
               InputLabelProps={{
